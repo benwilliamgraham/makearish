@@ -1,0 +1,49 @@
+<html>
+    <title>makea.rish</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <body style="background-color:#0000FF;color:#ffffff;text-align:center;">
+        <div style="position:absolute;top:0px;left:0px;">&#x1f1f5;&#x1f1f8;</div>
+        <canvas id="rish" style="width:462px;height:337px;margin:0 auto;border:1px solid white"></canvas>
+        <br>
+        <div id="status"></div>
+        <script>
+            // Get the time and determine if it's 11:12
+            var d = new Date();
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            var statusDiv = document.getElementById("status");
+            var canvas = document.getElementById("rish");
+            var ctx = canvas.getContext("2d");
+            
+            // Set canvas size to match the style dimensions
+            canvas.width = 462;
+            canvas.height = 337;
+
+            if (hours === 11 && minutes === 12) {
+                statusDiv.innerHTML = "11:12 make a rish";
+                var img = new Image();
+
+                var randomNum = Math.floor(Math.random() * 42);
+                img.src = "images/" + randomNum + ".png";
+                img.onload = function() {
+                    var aspectRatio = img.width / img.height;
+                    var targetHeight = Math.random() * (canvas.height * 0.5) + (canvas.height * 0.25);
+                    var targetWidth = targetHeight * aspectRatio;
+                    ctx.translate(Math.random() * canvas.width / 2 + canvas.width / 4, Math.random() * canvas.height / 2 + canvas.height / 4);
+                    ctx.rotate(Math.random() * 2 - 1);
+                    ctx.translate(-targetWidth / 2, -targetHeight / 2);
+                    ctx.scale(targetWidth / img.width, targetHeight / img.height);
+                    ctx.drawImage(img, 0, 0);
+                };
+            } else {
+                statusDiv.innerHTML = "come back at 11:12";
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "20px Arial";
+                ctx.textAlign = "center";
+                ctx.translate(Math.random() * canvas.width / 2 + canvas.width / 4, Math.random() * canvas.height / 2 + canvas.height / 4);
+                ctx.rotate(Math.random() * 2 * Math.PI);
+                ctx.fillText("come back at 11:12", 0, 0);
+            }
+        </script>
+    </body>
+</html>
