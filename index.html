@@ -19,7 +19,8 @@
             canvas.width = 462;
             canvas.height = 337;
 
-            if (hours === 11 && minutes === 12) {
+            // check if it's 11:12 am or pm
+            if ((hours === 11 && minutes === 12) || (hours === 23 && minutes === 12)) {
                 statusDiv.innerHTML = "11:12 make a rish";
                 var img = new Image();
 
